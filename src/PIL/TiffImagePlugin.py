@@ -1067,7 +1067,7 @@ class TiffImageFile(ImageFile.ImageFile):
             self._frame_pos.append(self.__next)
             logger.debug("Loading tags, location: %s" % self.fp.tell())
             self.tag_v2.load(self.fp)
-            self.__next = self.tag_v2.next
+            self.__next = self.tag_v2.next if self.tag_v2.next > self.__next else 0
             if self.__next == 0:
                 self._n_frames = frame + 1
             if len(self._frame_pos) == 1:

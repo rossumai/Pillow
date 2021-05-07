@@ -301,6 +301,10 @@ class TestFileTiff:
             assert im.size == (20, 20)
             assert im.convert("RGB").getpixel((0, 0)) == (0, 0, 255)
 
+    def test_seek_must_move_forward(self):
+        with Image.open("Tests/images/seek_without_progressing.tif") as im:
+            assert im.n_frames == 1
+
     def test___str__(self):
         filename = "Tests/images/pil136.tiff"
         with Image.open(filename) as im:
